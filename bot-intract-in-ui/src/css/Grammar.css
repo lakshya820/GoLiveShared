@@ -1,0 +1,80 @@
+.grammar {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    padding-top: 80px;
+}
+
+.grammar_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Horizontally center */
+    align-items: center;    /* Vertically center */
+    height: 100vh; 
+    gap: 8rem;
+}
+
+.grammar_content p{
+    font: normal normal 600 1.5rem/1.5 Open Sans, sans-serif;
+}
+
+.grammar_table {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    border-radius: 20px;
+    
+    overflow: hidden;
+    background-color: #FBFBFB;
+    border: 1px solid #43425D; /* Added border width and style */
+    margin-top: 60px;
+}
+
+.grammar_table thead{
+    font: normal normal bold 24px Open Sans, sans-serif;
+    color: #63666A;
+    text-align: center;
+    background-color: #DFC8F8;
+    height: 3.5rem;
+}
+
+.grammar_table th{
+    width: 100vw;
+}
+
+.grammar_table td{
+    text-align: center;
+    height: 8vh;
+}
+
+.grammar_next_button{
+    background-color: #5F249F;
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    border: none;
+}
+/* .table-header {
+    font-size: 33px;
+    color: #43425D;
+    text-align: center; /* Center header text 
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: center; /* Center content horizontally 
+    vertical-align: middle; /* Center content vertically 
+    font: normal normal normal 14px/27px Open Sans;
+    letter-spacing: 0px;
+    color: #43425D;
+    opacity: 1;
+}
+
+table th {
+    background-color: #DFC8F8;
+    font-weight: bold;
+    color: #63666A;
+} */
