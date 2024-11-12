@@ -52,7 +52,7 @@ const Grammar: React.FC = () => {
                     </tbody>
                   </table>
                   <p>Total Correct Percentage: {grammarCorrectionResult.total.toFixed(2)}%</p>
-                  <button className="grammar_next_button" onClick={handleSubmittoDashboard}>HOME</button>
+                  
                 </div>
               )}
           </div>
