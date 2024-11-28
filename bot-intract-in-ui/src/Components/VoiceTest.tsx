@@ -103,7 +103,7 @@ const VoiceTest: React.FC = () => {
     //if(!isDisconnect){
       //console.log(`Connection method :`,connection);
       connection?.disconnect();
-      const socket = io.connect("https://golive4-server.onrender.com");
+      const socket = io.connect("https://goliveshared-server.onrender.com");
       socket.on("connect", () => {
         setConnection(socket);
       });
@@ -142,7 +142,7 @@ const VoiceTest: React.FC = () => {
     setIsRecording(false);
     //setIsDisconnect(true);
 
-    const socket = io.connect("https://golive4-server.onrender.com");
+    const socket = io.connect("https://goliveshared-server.onrender.com");
 
     // socket.on("showgrammar", () =>{
     //   console.log("showingGrammarWorking");

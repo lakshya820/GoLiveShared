@@ -15,7 +15,7 @@ function unzip(buffer_string){
   return new TextDecoder().decode(ungzipedData);
 }
 
-const socket = io.connect('https://golive4-server.onrender.com'); 
+const socket = io.connect('https://goliveshared-server.onrender.com'); 
 //const navigate = useNavigate();
 
 AWS.config.update({

@@ -15,7 +15,7 @@ const Grammar: React.FC = () => {
   const [grammarCorrectionResult, setGrammarCorrectionResult] = useState<GrammarCorrectionResult | null>(null);
   const navigate = useNavigate();
 
-    const socket = io.connect("https://golive4-server.onrender.com");
+    const socket = io.connect("https://goliveshared-server.onrender.com");
 
   
     socket.on("grammarCorrectionResult", (data: GrammarCorrectionResult) => {
