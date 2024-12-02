@@ -53,6 +53,7 @@ export default function getLexResponse(_inputStream, _requestContentType){
   lex_params.inputStream = _inputStream;
   lex_params.requestContentType=_requestContentType;
   let questionList=[];
+  let sentiment=[];
 
   console.log("start call to lex.")
   lexV2Client.recognizeUtterance(lex_params, async function(err, data){
@@ -110,6 +111,7 @@ export default function getLexResponse(_inputStream, _requestContentType){
             for(let i=1; i<=Object.keys(slots).length; i++){
               answer[i-1]=slots['Question_'+i]['value']['originalValue'];
               questionList[i-1]=json_session_state["sessionAttributes"]['Question_'+i];
+              sentiment[i-1]=JSON.parse(json_session_state["sessionAttributes"]['cscore_'+i]);
             }
             console.log(answer);
             sessionStorage.setItem('lex_answers', answer);
@@ -117,6 +119,8 @@ export default function getLexResponse(_inputStream, _requestContentType){
             socket.emit("lexanswers", answer, questionList);
 
             socket.emit("lexquestions", questionList);
+
+            socket.emit("lexsentiment", sentiment);
             //window.location.href = '/test-complete.html';
             //const navigate = useNavigate();
             document.getElementById('grammar_redirect')?.click();

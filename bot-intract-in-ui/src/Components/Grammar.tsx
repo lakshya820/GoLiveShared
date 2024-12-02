@@ -11,8 +11,13 @@ interface GrammarCorrectionResult {
   total: number
 }
 
+interface SentimentAnalysisResult {
+  final_csi: number
+}
+
 const Grammar: React.FC = () => {
   const [grammarCorrectionResult, setGrammarCorrectionResult] = useState<GrammarCorrectionResult | null>(null);
+  const [sentimentResult, setSentimentResult] = useState<SentimentAnalysisResult | null>(null);
   const navigate = useNavigate();
 
     const socket = io.connect("https://goliveshared-server.onrender.com");
@@ -21,6 +26,11 @@ const Grammar: React.FC = () => {
     socket.on("grammarCorrectionResult", (data: GrammarCorrectionResult) => {
       setGrammarCorrectionResult(data);
       console.log('grammaresult:', data);
+    });
+
+    socket.on("lexsentimenttofrontend", (data: SentimentAnalysisResult) => {
+      setSentimentResult(data);
+      console.log('sentimenTresult:', data);
     });
 
     const handleSubmittoDashboard= () => {
@@ -52,6 +62,7 @@ const Grammar: React.FC = () => {
                     </tbody>
                   </table>
                   <p>Total Correct Percentage: {grammarCorrectionResult.total.toFixed(2)}%</p>
+                  <p>Final Sentiment: {sentimentResult?.final_csi !== undefined ? sentimentResult.final_csi.toFixed(2) : "N/A"}</p>
                   
                 </div>
               )}

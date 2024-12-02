@@ -117,12 +117,21 @@ io.on("connection", (socket) => {
 
     socket.on('lexquestions',async (data) => {
       console.log('Received questions from Lex:', data);
+
+      let csi_score=0.0;
+      socket.on("lexsentiment", (data) => {
+        csi_score=sentiment_calc(data);
+        console.log("**sentiment_backend:", csi_score);
+        
+      })
+
       questions=data;
       if(questions !== null){
         
         grammarCorrectionResult = await grammarcorrection(answers, questions);
         console.log("grammarReceived", grammarCorrectionResult);
         io.emit("grammarCorrectionResult", grammarCorrectionResult);
+        io.emit("lexsentimenttofrontend", csi_score);
         //io.emit("questions", questions);
 
       }
@@ -268,6 +277,40 @@ async function grammarcorrection(grammarArray, questions) {
  };
 }
 
+function sentiment_calc(data){
+  let csi=0;
+  let final_csi=0;
+
+  // Example: Extracting Positive sentiment scores
+  const positiveScores = data.map(entry => entry.Positive);
+  console.log('Positive Scores:', positiveScores);
+
+  // Example: Extracting Negative sentiment scores
+  const negativeScores = data.map(entry => entry.Negative);
+  console.log('Negative Scores:', negativeScores);
+
+  // Example: Extracting Neutral sentiment scores
+  const neutralScores = data.map(entry => entry.Neutral);
+  console.log('Neutral Scores:', neutralScores);
+
+  // Example: Extracting Mixed sentiment scores
+  const mixedScores = data.map(entry => entry.Mixed);
+  console.log('Mixed Scores:', mixedScores);
+
+  console.log('length of array:', positiveScores.length);
+
+  for (let i = 0; i < positiveScores.length; i++) {
+   csi=csi+(positiveScores[i]-negativeScores[i]-(mixedScores[i]*0.5)-(neutralScores[i]*0.5))
+   console.log("csi: ", (positiveScores[i]-negativeScores[i]-(mixedScores[i]*0.5)));
+  }
+
+  final_csi=(csi/4)*5;
+  console.log("final_csi: ", final_csi)
+
+  return {
+  final_csi
+  }
+}
 
 const port = process.env.PORT || 8081;
 server.listen(port, () => {
